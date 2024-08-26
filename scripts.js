@@ -1,14 +1,23 @@
-document.getElementById("consultation").addEventListener("click", function() {
-    document.getElementById("consultation-form").style.display = "block";
+// scripts.js
+document.getElementById('consultation').addEventListener('click', function() {
+    toggleForm('consultation-form');
 });
 
-document.getElementById("submit-consultation").addEventListener("click", function() {
-    let theme = document.getElementById("theme").value;
-    let datetime = document.getElementById("datetime").value;
-
-    if (window.Telegram.WebApp) {
-        window.Telegram.WebApp.sendData(${theme};${datetime});
-    } else {
-        console.error("Telegram Web App не доступен.");
-    }
+document.getElementById('services').addEventListener('click', function() {
+    toggleForm('services-list');
 });
+
+document.getElementById('order-status').addEventListener('click', function() {
+    toggleForm('order-status-view');
+});
+
+document.getElementById('extra-options').addEventListener('click', function() {
+    alert('Доп. Опции пока не реализованы');
+});
+
+function toggleForm(formId) {
+    document.querySelectorAll('.form').forEach(function(form) {
+        form.style.display = 'none';
+    });
+    document.getElementById(formId).style.display = 'block';
+}
