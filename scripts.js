@@ -6,18 +6,25 @@ tg.MainButton.color = '#2cab37';
 
 let item = "";
 
-let btn1 = document.getElementById("datetime");
-
 document.getElementById('consultation').addEventListener('click', function() {
     toggleForm('consultation-form');
+    tg.MainButton.setText("Оставить заявку на консультацию");
+    item = "consultation";
+    tg.MainButton.show();
 });
 
 document.getElementById('services').addEventListener('click', function() {
     toggleForm('services-list');
+    tg.MainButton.setText("Оставить заявку на услугу");
+    item = "services";
+    tg.MainButton.show();
 });
 
 document.getElementById('order-status').addEventListener('click', function() {
     toggleForm('order-status-view');
+    tg.MainButton.hide();
+    item = "order-status";
+    tg.sendData(item); // сразу отправляем данные, так как нет формы для заполнения
 });
 
 document.getElementById('extra-options').addEventListener('click', function() {
@@ -32,17 +39,19 @@ function toggleForm(formId) {
 }
 
 
-btn1.addEventListener("change", function(){
-	if (tg.MainButton.isVisible) {
-		tg.MainButton.hide();
-	}
-	else {
-		tg.MainButton.setText("Оставить заявку");
-		item = "1";
-		tg.MainButton.show();
-	}
-});
+Telegram.WebApp.onEvent("mainButtonClicked", function() {
+    let data = "";
+    
+    if (item === "consultation") {
+        let theme = document.getElementById('theme').value;
+        let datetime = document.getElementById('datetime').value;
+        data = JSON.stringify({ type: item, theme: theme, datetime: datetime });
+    } else if (item === "services") {
+        let service = document.getElementById('service-select').value;
+        let serviceDate = document.getElementById('service-date').value;
+        let budget = document.getElementById('budget').value;
+        data = JSON.stringify({ type: item, service: service, serviceDate: serviceDate, budget: budget });
+    }
 
-Telegram.WebApp.onEvent("mainButtonClicked", function(){
-	tg.sendData(item);
+    tg.sendData(data);
 });
