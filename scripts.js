@@ -1,4 +1,13 @@
-// scripts.js
+let tg = window.Telegram.WebApp;
+tg.expand();
+
+tg.MainButton.textColor = '#FFFFFF';
+tg.MainButton.color = '#2cab37';
+
+let item = "";
+
+let btn1 = document.getElementById("datetime");
+
 document.getElementById('consultation').addEventListener('click', function() {
     toggleForm('consultation-form');
 });
@@ -22,14 +31,18 @@ function toggleForm(formId) {
     document.getElementById(formId).style.display = 'block';
 }
 
-document.getElementById('submit-consultation').addEventListener('click', function() {
-    let theme = document.getElementById('theme').value;
-    let datetime = document.getElementById('datetime').value;
-    
-    let data = {
-        theme: theme,
-        datetime: datetime
-    };
 
-    Telegram.WebApp.sendData(JSON.stringify(data));
+btn1.addEventListener("change", function(){
+	if (tg.MainButton.isVisible) {
+		tg.MainButton.hide();
+	}
+	else {
+		tg.MainButton.setText("Оставить заявку");
+		item = "1";
+		tg.MainButton.show();
+	}
+});
+
+Telegram.WebApp.onEvent("mainButtonClicked", function(){
+	tg.sendData(item);
 });
