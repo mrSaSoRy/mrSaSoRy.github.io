@@ -21,3 +21,15 @@ function toggleForm(formId) {
     });
     document.getElementById(formId).style.display = 'block';
 }
+
+document.getElementById('submit-consultation').addEventListener('click', function() {
+    let theme = document.getElementById('theme').value;
+    let datetime = document.getElementById('datetime').value;
+    
+    let data = {
+        theme: theme,
+        datetime: datetime
+    };
+
+    Telegram.WebApp.sendData(JSON.stringify(data));
+});
