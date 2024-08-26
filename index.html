@@ -24,6 +24,25 @@
             <input type="datetime-local" id="datetime" name="datetime">
             <button id="submit-consultation">Отправить</button>
         </div>
+        
+        <div id="services-list" class="form" style="display:none;">
+            <h2>Наши услуги</h2>
+            <label for="service-select">Выберите услугу:</label>
+            <select id="service-select" name="service-select">
+                <option value="service1">Услуга 1</option>
+                <option value="service2">Услуга 2</option>
+                <option value="service3">Услуга 3</option>
+            </select>
+            <label for="service-date">Дата:</label>
+            <input type="date" id="service-date" name="service-date">
+            <label for="budget">Бюджет:</label>
+            <input type="number" id="budget" name="budget">
+        </div>
+        
+        <div id="order-status-view" class="form" style="display:none;">
+            <h2>Статус заказа</h2>
+            <p>Здесь будет выводиться состояние ваших заказов...</p>
+        </div>
     </div>
     <script src="scripts.js"></script>
 </body>
