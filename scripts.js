@@ -22,10 +22,10 @@ document.getElementById('consultation-form').addEventListener('submit', function
     const data = {
         theme: theme,
         datetime: datetime,
-        chat_id: YOUR_CHAT_ID // Замените YOUR_CHAT_ID на ваш реальный chat_id
+        chat_id: 231952028
     };
     
-    fetch('https://YOUR_SERVER_URL/consultation', { // Замените YOUR_SERVER_URL на ваш сервер
+    fetch('http://109.126.5.210:5000/consultation', { // Замените YOUR_SERVER_URL на ваш сервер
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
